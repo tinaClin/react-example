@@ -1,0 +1,24 @@
+name: Upload File
+run-name: ${{ github.actor }} is uploading file
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+      inputs:
+        purpose:
+          description: 'Purpose:'
+          required: false
+          default: 'Manually trigger upload file'
+jobs:
+  Capture-Flywheel-UI:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - run: mkdir -p path/to/artifact
+
+      - run: echo hello > path/to/artifact/world.txt
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: my-artifact
+          path: path/to/artifact/world.txt
